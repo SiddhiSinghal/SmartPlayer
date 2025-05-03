@@ -3,11 +3,12 @@ from player_persona import generate_personas
 from chat_sentiment import analyze_sentiment
 from mystery_mode import get_random_question
 from utils import load_data
+from emotion_game import load_chat_samples, get_chat_question  # Add this at the top
 
 st.set_page_config(page_title="SmartPlayer: Decode the Game", layout="wide")
 st.title("🎮 SmartPlayer – Decode the Game Within the Game")
 
-tab1, tab2, tab3 = st.tabs(["📊 Player Personas", "💬 Sentiment Map", "❓ Mystery Mode"])
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Player Personas", "💬 Sentiment Map", "❓ Mystery Mode","🧠 Emotion Game"])
 
 with tab1:
     st.subheader("Cluster Players Based on Behavior")
@@ -33,3 +34,20 @@ with tab3:
             st.success("🎉 Correct!")
         else:
             st.error(f"❌ Nope! It was {question['answer']}.")
+
+with tab4:
+    st.subheader("Guess the Emotion in the Chat!")
+    df_emotions = load_chat_samples("data/game_chats.csv")
+    question = get_chat_question(df_emotions)
+
+    if question:
+        st.markdown(f"**Chat Clue**: *{question['chat']}*")
+        user_guess = st.text_input("What's the emotion? (e.g., joy, sadness, anger, etc.)")
+
+        if st.button("Submit Emotion Guess"):
+            if user_guess.strip().lower() == question['emotion'].lower():
+                st.success("✅ Correct!")
+            else:
+                st.error(f"❌ Incorrect. The correct emotion was **{question['emotion']}**.")
+    else:
+        st.warning("Couldn't fetch a valid chat sample. Try refreshing.")
