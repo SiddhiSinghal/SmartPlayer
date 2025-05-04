@@ -4,6 +4,8 @@ from chat_sentiment import analyze_sentiment
 from mystery_mode import get_random_question
 from utils import load_data
 from emotion_game import load_chat_samples, get_chat_question  # Add this at the top
+import os
+os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 
 st.set_page_config(page_title="SmartPlayer: Decode the Game", layout="wide")
 st.title("🎮 SmartPlayer – Decode the Game Within the Game")
