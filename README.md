@@ -1,7 +1,7 @@
-🎮 SmartPlayer – Decode the Game Within the Game
+# 🎮 SmartPlayer – Decode the Game Within the Game
 SmartPlayer is an interactive Streamlit application designed to analyze player behavior and in-game chat data using clustering, sentiment analysis, and NLP. It helps game designers and analysts uncover hidden insights—and even adds a fun twist through gamification!
-
-📦 Project Structure
+---
+##📦 Project Structure
 
 SmartPlayer/
 │
@@ -20,8 +20,8 @@ SmartPlayer/
 ├── requirements.txt             # Python dependencies
 ├── .gitignore
 └── .gitattributes
-
-🚀 Features
+---
+##🚀 Features
 🧠 Player Persona Generator
 Uses KMeans clustering on player stats to identify unique personas like:
 
@@ -42,8 +42,21 @@ Displays anonymous chat snippets
 Lets the user guess the game context or emotion
 
 Awards points and encourages data-driven exploration
+---
+##📊 Built With
+Streamlit – for web interface
 
-🛠️ Setup Instructions
+Scikit-learn – for clustering and modeling
+
+Hugging Face Transformers – for emotion detection
+
+Pandas, NumPy – data handling
+
+Matplotlib, Seaborn – visualizations
+---
+##🛠️ Setup Instructions
+Follow these steps to run the project on your local machine:  
+```sh
 🔧 1. Clone the Repo
 
 git clone https://github.com/SiddhiSinghal/SmartPlayer.git
@@ -56,20 +69,6 @@ pip install -r requirements.txt
 ▶️ 3. Run the App
 
 streamlit run app.py
-📊 Built With
-Streamlit – for web interface
 
-Scikit-learn – for clustering and modeling
 
-Hugging Face Transformers – for emotion detection
 
-Pandas, NumPy – data handling
-
-Matplotlib, Seaborn – visualizations
-
-📈 Example Use Cases
-🎯 Segment players by behavioral traits
-
-🔍 Identify toxic or emotionally intense gameplay
-
-🎮 Make game analytics fun and interactive
