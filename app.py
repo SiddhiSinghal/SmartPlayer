@@ -5,12 +5,21 @@ from mystery_mode import get_random_question
 from utils import load_data
 from emotion_game import load_chat_samples, get_chat_question  # Add this at the top
 import os
+
+
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 
 st.set_page_config(page_title="SmartPlayer: Decode the Game", layout="wide")
 st.title("🎮 SmartPlayer – Decode the Game Within the Game")
 
-tab1, tab2, tab3, tab4 = st.tabs(["📊 Player Personas", "💬 Sentiment Map", "❓ Mystery Mode","🧠 Emotion Game"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "📊 Player Personas", 
+    "💬 Sentiment Map", 
+    "❓ Mystery Mode",
+    "🧠 Emotion Game",
+    "📈 Monitoring"
+])
+
 
 with tab1:
     st.subheader("Cluster Players Based on Behavior")
@@ -53,3 +62,27 @@ with tab4:
                 st.error(f"❌ Incorrect. The correct emotion was **{question['emotion']}**.")
     else:
         st.warning("Couldn't fetch a valid chat sample. Try refreshing.")
+
+with tab5:
+    st.subheader("📈 Monitoring Dashboard")
+
+    # Read logs from logs.txt
+    try:
+        with open("logs.txt", "r") as f:
+            logs = f.readlines()
+    except FileNotFoundError:
+        logs = []
+
+    st.subheader("Recent Logs")
+    if logs:
+        st.code("".join(logs[-15:]), language='text')  # Show last 15 entries
+    else:
+        st.info("No logs recorded yet.")
+
+    st.subheader("Simulated Request Volume")
+    if logs:
+        chart_data = [len(logs[i:i+5]) for i in range(0, len(logs), 5)]
+        st.line_chart(chart_data)
+    else:
+        st.write("Insufficient data for charting.")
+

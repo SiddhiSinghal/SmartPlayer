@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartplayer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smartplayer
+  template:
+    metadata:
+      labels:
+        app: smartplayer
+    spec:
+      containers:
+      - name: smartplayer
+        image: public-image
+        ports:
+        - containerPort: 8501
